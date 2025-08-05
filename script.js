@@ -46,6 +46,28 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+        // Gallery image lazy loading and animation
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.style.opacity = '1';
+                        img.style.transform = 'scale(1)';
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            const galleryImages = document.querySelectorAll('.gallery-item img');
+            galleryImages.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transform = 'scale(0.8)';
+                img.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                imageObserver.observe(img);
+            });
+        }
+
         // Form submission handling
         const contactForm = document.querySelector('form');
         if (contactForm) {
@@ -57,11 +79,17 @@ document.addEventListener('DOMContentLoaded', function() {
                     const name = this.querySelector('input[name="name"]').value;
                     const email = this.querySelector('input[name="email"]').value;
                     const phone = this.querySelector('input[name="phone"]').value;
+                    const service = this.querySelector('select[name="service"]') ? this.querySelector('select[name="service"]').value : '';
                     const message = this.querySelector('textarea[name="message"]').value;
                     
                     // Basic validation
                     if (!name || !email || !message) {
                         alert('Please fill in all required fields (Name, Email, and Message).');
+                        return;
+                    }
+
+                    if (this.querySelector('select[name="service"]') && !service) {
+                        alert('Please select a service type.');
                         return;
                     }
                     
@@ -79,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     submitBtn.disabled = true;
                     
                     setTimeout(() => {
-                        alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+                        alert('Thank you for your interest! We\'ll contact you within 24 hours to schedule your free estimate.');
                         this.reset();
                         submitBtn.textContent = originalText;
                         submitBtn.disabled = false;

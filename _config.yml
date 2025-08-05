@@ -1,6 +1,6 @@
-# GitHub Pages configuration for GreenBlades Lawn Services
-title: "GreenBlades Lawn Services"
-description: "Professional lawn care services - reliable, affordable, and local"
+# GitHub Pages configuration for Acosta Landscaping and Construction
+title: "Acosta Landscaping and Construction"
+description: "Professional landscaping, hardscaping, fence installation, and outdoor construction services"
 url: ""  # Will be set automatically by GitHub Pages
 baseurl: ""  # Will be set automatically by GitHub Pages
 
@@ -25,7 +25,7 @@ plugins:
 
 # SEO settings
 lang: en_US
-author: "GreenBlades Lawn Services"
+author: "Acosta Landscaping and Construction"
 twitter:
   username: ""  # Add your Twitter handle if you have one
 facebook:
