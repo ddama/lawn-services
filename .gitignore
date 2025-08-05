@@ -1,0 +1,29 @@
+# GitHub Pages / Jekyll
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# Node modules (if you add any in the future)
+node_modules/
+npm-debug.log*
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp

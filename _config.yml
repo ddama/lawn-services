@@ -1,0 +1,36 @@
+# GitHub Pages configuration for GreenBlades Lawn Services
+title: "GreenBlades Lawn Services"
+description: "Professional lawn care services - reliable, affordable, and local"
+url: ""  # Will be set automatically by GitHub Pages
+baseurl: ""  # Will be set automatically by GitHub Pages
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - .gitignore
+  - .git/
+
+# Include files that start with underscores
+include:
+  - _config.yml
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# SEO settings
+lang: en_US
+author: "GreenBlades Lawn Services"
+twitter:
+  username: ""  # Add your Twitter handle if you have one
+facebook:
+  publisher: ""  # Add your Facebook page if you have one
+
+# Site verification (add these if you use Google Analytics, etc.)
+google_analytics: ""  # Add your GA tracking ID if you have one
+google_site_verification: ""  # Add your Google site verification if you have one
