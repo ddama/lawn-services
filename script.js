@@ -194,15 +194,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Add loading animation for service icons
-        const serviceIcons = document.querySelectorAll('.service-icon');
-        serviceIcons.forEach((icon, index) => {
-            setTimeout(() => {
-                icon.style.transform = 'scale(1)';
-                icon.style.opacity = '1';
-            }, index * 200);
-        });
-
         // Phone number formatting
         const phoneInputs = document.querySelectorAll('input[type="tel"]');
         phoneInputs.forEach(input => {
