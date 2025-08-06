@@ -68,6 +68,46 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        // Add click event listeners to gallery images
+        const galleryImageElements = document.querySelectorAll('.gallery-image');
+        galleryImageElements.forEach((img, index) => {
+            // Multiple event types for better browser compatibility
+            ['click', 'touchend'].forEach(eventType => {
+                img.addEventListener(eventType, function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Gallery image clicked:', eventType, index); // Debug log
+                    openLightbox(this);
+                }, { passive: false });
+            });
+            
+            // Also add to gallery items for better click area
+            const galleryItem = img.closest('.gallery-item');
+            if (galleryItem) {
+                ['click', 'touchend'].forEach(eventType => {
+                    galleryItem.addEventListener(eventType, function(e) {
+                        // Only trigger if we didn't click on the overlay text
+                        if (e.target === galleryItem || e.target === img) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('Gallery item clicked:', eventType, index); // Debug log
+                            openLightbox(img);
+                        }
+                    }, { passive: false });
+                });
+            }
+        });
+
+        // Fallback: Add global click handler for images with gallery-image class
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('gallery-image')) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Fallback click handler triggered'); // Debug log
+                openLightbox(e.target);
+            }
+        });
+
         // Form submission handling
         const contactForm = document.querySelector('form');
         if (contactForm) {
@@ -202,26 +242,48 @@ const galleryImages = [
 ];
 
 function openLightbox(imgElement) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxTitle = document.getElementById('lightbox-title');
-    const lightboxDescription = document.getElementById('lightbox-description');
-    
-    // Find the index of the clicked image
-    const clickedSrc = imgElement.src;
-    currentImageIndex = galleryImages.findIndex(img => clickedSrc.includes(img.src.split('/').pop()));
-    
-    if (currentImageIndex === -1) currentImageIndex = 0;
-    
-    // Set the image and content
-    updateLightboxContent();
-    
-    // Show the lightbox
-    lightbox.classList.add('active');
-    lightbox.style.display = 'flex';
-    
-    // Prevent body scroll
-    document.body.style.overflow = 'hidden';
+    try {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDescription = document.getElementById('lightbox-description');
+        
+        if (!lightbox || !lightboxImg || !lightboxTitle || !lightboxDescription) {
+            console.error('Lightbox elements not found');
+            return;
+        }
+        
+        // Find the index of the clicked image
+        const clickedSrc = imgElement.src;
+        console.log('Clicked image src:', clickedSrc); // Debug log
+        
+        currentImageIndex = galleryImages.findIndex(img => {
+            const imgFilename = img.src.split('/').pop();
+            const clickedFilename = clickedSrc.split('/').pop();
+            return imgFilename === clickedFilename;
+        });
+        
+        if (currentImageIndex === -1) {
+            console.warn('Image not found in gallery array, defaulting to 0');
+            currentImageIndex = 0;
+        }
+        
+        console.log('Opening lightbox for image index:', currentImageIndex); // Debug log
+        
+        // Set the image and content
+        updateLightboxContent();
+        
+        // Show the lightbox
+        lightbox.classList.add('active');
+        lightbox.style.display = 'flex';
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        
+        console.log('Lightbox opened successfully'); // Debug log
+    } catch (error) {
+        console.error('Error opening lightbox:', error);
+    }
 }
 
 function closeLightbox() {

@@ -252,6 +252,7 @@ nav a.active {
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .gallery-item:hover {
@@ -265,6 +266,7 @@ nav a.active {
   object-fit: cover;
   transition: transform 0.3s ease;
   cursor: pointer;
+  user-select: none;
 }
 
 .gallery-item:hover img {
