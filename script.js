@@ -119,6 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     const formStatus = document.getElementById('form-status');
                     const submitBtn = this.querySelector('.submit-btn');
                     
+                    // Debug: Log form data
+                    console.log('Form action:', this.action);
+                    for (let [key, value] of formData.entries()) {
+                        console.log(key, value);
+                    }
+                    
                     // Show loading state
                     submitBtn.textContent = 'Sending...';
                     submitBtn.disabled = true;
@@ -135,14 +141,24 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     })
                     .then(response => {
+                        console.log('Response status:', response.status); // Debug log
+                        console.log('Response headers:', response.headers); // Debug log
+                        
                         if (response.ok) {
-                            // Success
-                            formStatus.className = 'form-status success';
-                            formStatus.textContent = 'Thank you! Your message has been sent. We\'ll contact you within 24 hours to discuss your project.';
-                            this.reset();
+                            return response.json().then(data => {
+                                // Success
+                                formStatus.className = 'form-status success';
+                                formStatus.textContent = 'Thank you! Your message has been sent. We\'ll contact you within 24 hours to discuss your project.';
+                                this.reset();
+                            });
                         } else {
-                            // Error from server
-                            throw new Error('Server error');
+                            // Try to get error details from response
+                            return response.json().then(data => {
+                                console.error('Server error response:', data); // Debug log
+                                throw new Error(`Server error: ${response.status} - ${data.error || 'Unknown error'}`);
+                            }).catch(() => {
+                                throw new Error(`Server error: ${response.status}`);
+                            });
                         }
                     })
                     .catch(error => {
