@@ -22,7 +22,6 @@
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#gallery">Gallery</a>
-      <a href="#pricing">Pricing</a>
       <a href="#testimonials">Reviews</a>
       <a href="#contact">Contact</a>
     </div>
@@ -86,72 +85,59 @@
         <p class="gallery-intro">Transform your outdoor space with our expert landscaping and hardscaping services. Here are some of our recent transformations:</p>
         <div class="gallery-grid">
           <div class="gallery-item">
-            <img src="images/1000.6079cf372acdf9.43909082.jpg" alt="Beautiful outdoor fire pit area with natural stone seating and mountain views" loading="lazy">
+            <img src="images/1000.6079cf372acdf9.43909082.jpg" alt="Beautiful outdoor fire pit area with natural stone seating and mountain views" loading="lazy" onclick="openLightbox(this)">
             <div class="gallery-overlay">
               <h3>Fire Pit & Outdoor Seating</h3>
               <p>Custom fire pit with natural stone seating area</p>
             </div>
           </div>
           <div class="gallery-item">
-            <img src="images/1000.6079cfc29e0231.40574727.jpg" alt="Stunning water feature with waterfall and landscape lighting" loading="lazy">
+            <img src="images/1000.6079cfc29e0231.40574727.jpg" alt="Stunning water feature with waterfall and landscape lighting" loading="lazy" onclick="openLightbox(this)">
             <div class="gallery-overlay">
               <h3>Water Features & Lighting</h3>
               <p>Custom waterfall with professional landscape lighting</p>
             </div>
           </div>
           <div class="gallery-item">
-            <img src="images/1000.6131145a731bd3.82261839.jpg" alt="Complete backyard transformation with patio, dining area, and landscaping" loading="lazy">
+            <img src="images/1000.6131145a731bd3.82261839.jpg" alt="Complete backyard transformation with patio, dining area, and landscaping" loading="lazy" onclick="openLightbox(this)">
             <div class="gallery-overlay">
               <h3>Complete Backyard Transformation</h3>
               <p>Patio installation with outdoor dining and landscaping</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="images/1000_F_288185574_0eqnHzrxeKROJxZfAbQZMHEhMvL6wnun.jpg" alt="Professional fence installation with beautiful landscaping" loading="lazy" onclick="openLightbox(this)">
+            <div class="gallery-overlay">
+              <h3>Fence Installation & Landscaping</h3>
+              <p>Custom fence installation with integrated landscape design</p>
+            </div>
+          </div>
+          <div class="gallery-item">
+            <img src="images/240_F_30485307_5bH6uMOf6VaWzJaH2VTe9SLny60KVVaQ.jpg" alt="Beautiful garden design and plant installation" loading="lazy" onclick="openLightbox(this)">
+            <div class="gallery-overlay">
+              <h3>Garden Design & Installation</h3>
+              <p>Professional garden design with carefully selected plants and layout</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="pricing" class="section pricing-section">
-      <div class="container">
-        <h2>Investment Ranges</h2>
-        <div class="pricing-grid">
-          <div class="pricing-card">
-            <h3>Landscape Design</h3>
-            <div class="price">$2,500+</div>
-            <div class="price-period">starting investment</div>
-            <ul>
-              <li>Plant installation</li>
-              <li>Garden design</li>
-              <li>Irrigation setup</li>
-              <li>Mulching & finishing</li>
-            </ul>
-          </div>
-          <div class="pricing-card featured">
-            <h3>Hardscaping Projects</h3>
-            <div class="price">$5,000+</div>
-            <div class="price-period">starting investment</div>
-            <ul>
-              <li>Patios & walkways</li>
-              <li>Retaining walls</li>
-              <li>Fire pits & features</li>
-              <li>Outdoor kitchens</li>
-            </ul>
-            <div class="popular-badge">Most Popular</div>
-          </div>
-          <div class="pricing-card">
-            <h3>Complete Transformations</h3>
-            <div class="price">$15,000+</div>
-            <div class="price-period">starting investment</div>
-            <ul>
-              <li>Full backyard renovation</li>
-              <li>Custom fence installation</li>
-              <li>Water features</li>
-              <li>Outdoor structures</li>
-            </ul>
-          </div>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+      <div class="lightbox-content">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="">
+        <div class="lightbox-caption">
+          <div id="lightbox-title"></div>
+          <div id="lightbox-description"></div>
         </div>
-        <p class="pricing-note">*Every project is unique. Contact us for a personalized estimate based on your specific needs and space.</p>
+        <div class="lightbox-nav">
+          <button class="lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
+          <button class="lightbox-next" onclick="changeImage(1)">&#10095;</button>
+        </div>
       </div>
-    </section>
+    </div>
 
     <section id="testimonials" class="section">
       <div class="container">
@@ -188,7 +174,7 @@
             </div>
             <div class="contact-item">
               <strong>📞 Phone:</strong>
-              <a href="tel:+11234567890">(123) 456-7890</a>
+              <a href="tel:+13605083816">(360) 508-3816</a>
             </div>
             <div class="contact-item">
               <strong>🕒 Hours:</strong>
@@ -196,7 +182,7 @@
             </div>
             <div class="contact-item">
               <strong>📍 Service Area:</strong>
-              Greater metro area and surrounding communities
+              Greater Seattle Area
             </div>
           </div>
           <div class="contact-form">
