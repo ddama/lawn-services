@@ -187,7 +187,7 @@
           </div>
           <div class="contact-form">
             <h3>Request a Free Estimate</h3>
-            <form>
+            <form action="https://formspree.io/f/xdkogepj" method="POST" id="contact-form">
               <div class="form-group">
                 <input type="text" name="name" placeholder="Your Name" required>
               </div>
@@ -210,7 +210,12 @@
               <div class="form-group">
                 <textarea name="message" placeholder="Describe your project vision and any specific requirements..." rows="4" required></textarea>
               </div>
+              <!-- Hidden fields for better organization -->
+              <input type="hidden" name="_subject" value="New landscaping inquiry from website">
+              <input type="hidden" name="_next" value="thank-you">
+              <input type="hidden" name="_captcha" value="false">
               <button type="submit" class="submit-btn">Get Free Estimate</button>
+              <div id="form-status" class="form-status" style="display: none;"></div>
             </form>
           </div>
         </div>

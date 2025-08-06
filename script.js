@@ -108,53 +108,66 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Form submission handling
-        const contactForm = document.querySelector('form');
+        // Form submission handling with Formspree
+        const contactForm = document.getElementById('contact-form');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 try {
-                    // Get form data
-                    const name = this.querySelector('input[name="name"]').value;
-                    const email = this.querySelector('input[name="email"]').value;
-                    const phone = this.querySelector('input[name="phone"]').value;
-                    const service = this.querySelector('select[name="service"]') ? this.querySelector('select[name="service"]').value : '';
-                    const message = this.querySelector('textarea[name="message"]').value;
-                    
-                    // Basic validation
-                    if (!name || !email || !message) {
-                        alert('Please fill in all required fields (Name, Email, and Message).');
-                        return;
-                    }
-
-                    if (this.querySelector('select[name="service"]') && !service) {
-                        alert('Please select a service type.');
-                        return;
-                    }
-                    
-                    // Email validation
-                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!emailRegex.test(email)) {
-                        alert('Please enter a valid email address.');
-                        return;
-                    }
-                    
-                    // Simulate form submission (replace with actual form handling)
+                    const formData = new FormData(this);
+                    const formStatus = document.getElementById('form-status');
                     const submitBtn = this.querySelector('.submit-btn');
-                    const originalText = submitBtn.textContent;
+                    
+                    // Show loading state
                     submitBtn.textContent = 'Sending...';
                     submitBtn.disabled = true;
+                    formStatus.style.display = 'block';
+                    formStatus.className = 'form-status loading';
+                    formStatus.textContent = 'Sending your message...';
                     
-                    setTimeout(() => {
-                        alert('Thank you for your interest! We\'ll contact you within 24 hours to schedule your free estimate.');
-                        this.reset();
-                        submitBtn.textContent = originalText;
+                    // Submit to Formspree
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Success
+                            formStatus.className = 'form-status success';
+                            formStatus.textContent = 'Thank you! Your message has been sent. We\'ll contact you within 24 hours to discuss your project.';
+                            this.reset();
+                        } else {
+                            // Error from server
+                            throw new Error('Server error');
+                        }
+                    })
+                    .catch(error => {
+                        // Network or other error
+                        console.error('Form submission error:', error);
+                        formStatus.className = 'form-status error';
+                        formStatus.textContent = 'Sorry, there was an error sending your message. Please try again or call us directly at (360) 508-3816.';
+                    })
+                    .finally(() => {
+                        // Reset button state
+                        submitBtn.textContent = 'Get Free Estimate';
                         submitBtn.disabled = false;
-                    }, 1500);
+                        
+                        // Hide status message after 10 seconds
+                        setTimeout(() => {
+                            formStatus.style.display = 'none';
+                        }, 10000);
+                    });
+                    
                 } catch (error) {
-                    console.error('Form submission error:', error);
-                    alert('There was an error submitting the form. Please try again.');
+                    console.error('Form handling error:', error);
+                    const formStatus = document.getElementById('form-status');
+                    formStatus.style.display = 'block';
+                    formStatus.className = 'form-status error';
+                    formStatus.textContent = 'There was an error processing your request. Please try again.';
                 }
             });
         }
