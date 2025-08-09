@@ -23,6 +23,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Accessibility utility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -443,7 +452,6 @@ nav a.active {
 
 /* Animation classes */
 .service-card,
-.pricing-card,
 .testimonial,
 .feature {
   opacity: 0;
@@ -452,95 +460,12 @@ nav a.active {
 }
 
 .service-card.animate-in,
-.pricing-card.animate-in,
 .testimonial.animate-in,
 .feature.animate-in {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Pricing section */
-.pricing-section {
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-}
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
-}
-
-.pricing-card {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-  position: relative;
-  border: 2px solid transparent;
-}
-
-.pricing-card:hover {
-  transform: translateY(-5px);
-}
-
-.pricing-card.featured {
-  border-color: #4CAF50;
-  transform: scale(1.05);
-}
-
-.pricing-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #333;
-}
-
-.price {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #4CAF50;
-}
-
-.price-period {
-  color: #666;
-  margin-bottom: 2rem;
-}
-
-.pricing-card ul {
-  list-style: none;
-  margin: 2rem 0;
-}
-
-.pricing-card li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #eee;
-}
-
-.pricing-card li:last-child {
-  border-bottom: none;
-}
-
-.popular-badge {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #4CAF50;
-  color: white;
-  padding: 5px 20px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-}
-
-.pricing-note {
-  text-align: center;
-  color: #666;
-  font-style: italic;
-  margin-top: 2rem;
-}
 
 /* Testimonials section */
 .testimonials-grid {
@@ -731,9 +656,7 @@ footer {
     gap: 2rem;
   }
   
-  .pricing-card.featured {
-    transform: none;
-  }
+  /* Removed pricing-card styles */
   
   .features {
     grid-template-columns: 1fr;
@@ -800,8 +723,7 @@ footer {
     grid-template-columns: 1fr;
   }
   
-  .service-card,
-  .pricing-card {
+  .service-card {
     padding: 1.5rem;
   }
 }

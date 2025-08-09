@@ -1,4 +1,4 @@
-// Enhanced functionality for GreenBlades Lawn Services website
+// Enhanced functionality for Acosta Landscaping and Construction website
 // Production-ready version for GitHub Pages
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -125,6 +125,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         console.log(key, value);
                     }
                     
+                    // Clear previous status (without hiding if success until new submit starts)
+                    formStatus.textContent = '';
+                    formStatus.className = 'form-status';
+                    
                     // Show loading state
                     submitBtn.textContent = 'Sending...';
                     submitBtn.disabled = true;
@@ -140,43 +144,80 @@ document.addEventListener('DOMContentLoaded', function() {
                             'Accept': 'application/json'
                         }
                     })
+                    // Fallback: if nothing happens after 4s, show processing message
+                    .then(r => { window.__formspreeLastStatus = r.status; return r; })
                     .then(response => {
                         console.log('Response status:', response.status); // Debug log
-                        console.log('Response headers:', response.headers); // Debug log
                         
                         if (response.ok) {
-                            return response.json().then(data => {
-                                // Success
+                            return response.json().catch(() => ({})).then(data => {
                                 formStatus.className = 'form-status success';
+                                formStatus.style.display = 'block';
                                 formStatus.textContent = 'Thank you! Your message has been sent. We\'ll contact you within 24 hours to discuss your project.';
                                 this.reset();
-                            });
-                        } else {
-                            // Try to get error details from response
-                            return response.json().then(data => {
-                                console.error('Server error response:', data); // Debug log
-                                throw new Error(`Server error: ${response.status} - ${data.error || 'Unknown error'}`);
-                            }).catch(() => {
-                                throw new Error(`Server error: ${response.status}`);
+                                // Ensure visibility and announce
+                                setTimeout(() => {
+                                    formStatus.scrollIntoView({ behavior: 'smooth', block: 'center'});
+                                    formStatus.focus({ preventScroll: true });
+                                }, 50);
+                                console.log('Success path executed, status element updated.');
                             });
                         }
+
+                        // Non-OK responses: classify
+                        const status = response.status;
+                        return response.json().catch(() => ({})).then(data => {
+                            console.error('Server error response:', status, data);
+                            if (status === 404) {
+                                throw new Error('FORM_NOT_FOUND');
+                            } else if (status === 422) {
+                                throw new Error('VALIDATION_ERROR');
+                            } else if (status === 429) {
+                                throw new Error('RATE_LIMIT');
+                            } else if (status >= 500) {
+                                throw new Error('SERVER_ERROR');
+                            }
+                            throw new Error(data.error || `HTTP_${status}`);
+                        });
                     })
                     .catch(error => {
-                        // Network or other error
                         console.error('Form submission error:', error);
                         formStatus.className = 'form-status error';
-                        formStatus.textContent = 'Sorry, there was an error sending your message. Please try again or call us directly at (360) 508-3816.';
+                        formStatus.style.display = 'block';
+                        switch (error.message) {
+                            case 'FORM_NOT_FOUND':
+                                formStatus.textContent = 'Submission temporarily unavailable (form not configured). Please call (360) 508-3816 or try again later.';
+                                break;
+                            case 'VALIDATION_ERROR':
+                                formStatus.textContent = 'Please check all required fields and try again.';
+                                break;
+                            case 'RATE_LIMIT':
+                                formStatus.textContent = 'You\'ve submitted too many times. Please wait a minute and try again, or call us directly.';
+                                break;
+                            case 'SERVER_ERROR':
+                                formStatus.textContent = 'Our mail service is having an issue. Please call (360) 508-3816.';
+                                break;
+                            default:
+                                formStatus.textContent = 'Sorry, there was an error sending your message. Please try again or call us directly at (360) 508-3816.';
+                        }
                     })
                     .finally(() => {
                         // Reset button state
                         submitBtn.textContent = 'Get Free Estimate';
                         submitBtn.disabled = false;
                         
-                        // Hide status message after 10 seconds
-                        setTimeout(() => {
-                            formStatus.style.display = 'none';
-                        }, 10000);
+                        // Do not auto-hide success; hide only on navigation or manual interaction (left visible)
                     });
+
+                    // Fallback watchdog
+                    setTimeout(() => {
+                        if (!formStatus.textContent) {
+                            console.warn('Fallback watchdog: status still empty after 4s. Last HTTP status:', window.__formspreeLastStatus);
+                            formStatus.style.display = 'block';
+                            formStatus.className = 'form-status loading';
+                            formStatus.textContent = 'Processing your request...';
+                        }
+                    }, 4000);
                     
                 } catch (error) {
                     console.error('Form handling error:', error);
@@ -204,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, observerOptions);
 
             // Observe all service cards, pricing cards, and testimonials
-            const animatedElements = document.querySelectorAll('.service-card, .pricing-card, .testimonial, .feature');
+            const animatedElements = document.querySelectorAll('.service-card, .testimonial, .feature');
             animatedElements.forEach(el => {
                 observer.observe(el);
             });
@@ -267,6 +308,7 @@ function openLightbox(imgElement) {
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxTitle = document.getElementById('lightbox-title');
         const lightboxDescription = document.getElementById('lightbox-description');
+    const lightboxContent = document.querySelector('.lightbox-content');
         
         if (!lightbox || !lightboxImg || !lightboxTitle || !lightboxDescription) {
             console.error('Lightbox elements not found');
@@ -296,9 +338,14 @@ function openLightbox(imgElement) {
         // Show the lightbox
         lightbox.classList.add('active');
         lightbox.style.display = 'flex';
+        lightbox.removeAttribute('aria-hidden');
         
         // Prevent body scroll
         document.body.style.overflow = 'hidden';
+        // Move focus inside
+        if (lightboxContent) {
+            lightboxContent.focus();
+        }
         
         console.log('Lightbox opened successfully'); // Debug log
     } catch (error) {
@@ -310,6 +357,7 @@ function closeLightbox() {
     const lightbox = document.getElementById('lightbox');
     lightbox.classList.remove('active');
     lightbox.style.display = 'none';
+    lightbox.setAttribute('aria-hidden', 'true');
     
     // Restore body scroll
     document.body.style.overflow = 'auto';
