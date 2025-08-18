@@ -1,4 +1,4 @@
-# Acosta Landscaping and Construction Website
+# Westland Landscape and Construction Website
 
 A professional, responsive website for a landscaping and construction business specializing in backyard transformations, hardscaping, and fence installations. This website showcases services, project gallery, pricing information, and provides an easy way for potential customers to request estimates.
 
@@ -56,7 +56,7 @@ A professional, responsive website for a landscaping and construction business s
 To customize this website for your landscaping business:
 
 1. **Update Company Information**:
-   - Change "Acosta Landscaping and Construction" to your company name
+   - Change "Westland Landscape and Construction" to your company name
    - Update contact information (email, phone, address)
    - Modify service area details
 

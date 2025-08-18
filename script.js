@@ -1,8 +1,10 @@
-// Enhanced functionality for Acosta Landscaping and Construction website
+// Enhanced functionality for Westland Landscape and Construction website
 // Production-ready version for GitHub Pages
 
 document.addEventListener('DOMContentLoaded', function() {
     try {
+    // Simple nav: no mobile toggle or shrink logic
+
         // Smooth scrolling for navigation links
         const navLinks = document.querySelectorAll('nav a[href^="#"]');
         navLinks.forEach(link => {
@@ -275,31 +277,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // Lightbox functionality
 let currentImageIndex = 0;
 const galleryImages = [
-    {
-        src: 'images/1000.6079cf372acdf9.43909082.jpg',
-        title: 'Fire Pit & Outdoor Seating',
-        description: 'Custom fire pit with natural stone seating area and stunning mountain views'
-    },
-    {
-        src: 'images/1000.6079cfc29e0231.40574727.jpg',
-        title: 'Water Features & Lighting',
-        description: 'Custom waterfall with professional landscape lighting and natural stone work'
-    },
-    {
-        src: 'images/1000.6131145a731bd3.82261839.jpg',
-        title: 'Complete Backyard Transformation',
-        description: 'Full patio installation with outdoor dining area and comprehensive landscaping'
-    },
-    {
-        src: 'images/1000_F_288185574_0eqnHzrxeKROJxZfAbQZMHEhMvL6wnun.jpg',
-        title: 'Fence Installation & Landscaping',
-        description: 'Professional fence installation with integrated landscape design for privacy and beauty'
-    },
-    {
-        src: 'images/240_F_30485307_5bH6uMOf6VaWzJaH2VTe9SLny60KVVaQ.jpg',
-        title: 'Garden Design & Installation',
-        description: 'Expert garden design with carefully selected plants and professional layout planning'
-    }
+    { src: 'images/IMG_20250818_031846.jpg', title: 'Project Photo', description: 'Recent landscaping and hardscaping work' },
+    { src: 'images/IMG_20250818_031846.png', title: 'Project Photo', description: 'Design detail and stonework' },
+    { src: 'images/IMG_20250818_031846_(1).jpg', title: 'Project Photo', description: 'Backyard landscape and features' },
+    { src: 'images/IMG_20250818_031846_(3).jpg', title: 'Project Photo', description: 'Outdoor living space' },
+    { src: 'images/IMG_20250818_031846_(4).jpg', title: 'Project Photo', description: 'Garden and hardscape blend' },
+    { src: 'images/IMG_20250818_031847.jpg', title: 'Project Photo', description: 'Finished result' },
 ];
 
 function openLightbox(imgElement) {
