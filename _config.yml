@@ -1,8 +1,8 @@
 # GitHub Pages configuration for Westland Landscape and Construction
 title: "Westland Landscape and Construction"
 description: "Professional landscaping, hardscaping, fence installation, and outdoor construction services"
-url: ""  # Will be set automatically by GitHub Pages
-baseurl: ""  # Will be set automatically by GitHub Pages
+url: "https://wlscape.com"  # Custom domain
+baseurl: ""  # Site is served at the root
 
 # Build settings
 markdown: kramdown
