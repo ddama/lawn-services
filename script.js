@@ -277,9 +277,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // Lightbox functionality
 let currentImageIndex = 0;
 const galleryImages = [
-    { src: 'images/IMG_20250818_031846.jpg', title: 'Seattle Backyard Makeover', description: 'New patio, planting, and lighting by Westland Landscape' },
+    { src: 'images/IMG_20250818_031846.jpg', title: 'Backyard Makeover', description: 'New patio, planting, and lighting by Westland Landscape' },
     { src: 'images/IMG_20250818_031846.png', title: 'Bellevue Stone Patio', description: 'Modern hardscaping details with pavers and stone' },
-    { src: 'images/IMG_20250818_031846_(1).jpg', title: 'Kirkland Retaining Wall', description: 'Garden pathway, compact wall, and native plants' },
+    { src: 'images/IMG_20250818_031846_(1).jpg', title: 'Artificial Grass', description: 'Artificial grass installation with pathway and plants' },
     { src: 'images/IMG_20250818_031846_(3).jpg', title: 'Redmond Outdoor Living', description: 'Cozy fire pit area with seating and lighting' },
     { src: 'images/IMG_20250818_031846_(4).jpg', title: 'Sammamish Privacy Fence', description: 'Cedar fence installation with clean lines' },
     { src: 'images/IMG_20250818_031847.jpg', title: 'Issaquah Garden & Hardscape', description: 'Polished garden and hardscape blend with lighting' },
