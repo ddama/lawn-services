@@ -278,11 +278,16 @@ document.addEventListener('DOMContentLoaded', function() {
 let currentImageIndex = 0;
 const galleryImages = [
     { src: 'images/IMG_20250818_031846.jpg', title: 'Backyard Makeover', description: 'New patio, planting, and lighting by Westland Landscape' },
-    { src: 'images/IMG_20250818_031846.png', title: 'Bellevue Stone Patio', description: 'Modern hardscaping details with pavers and stone' },
+    { src: 'images/IMG_20250818_031846-bellevue.jpg', title: 'Bellevue Stone Patio', description: 'Modern hardscaping details with pavers and stone' },
     { src: 'images/IMG_20250818_031846_(1).jpg', title: 'Artificial Grass', description: 'Artificial grass installation with pathway and plants' },
     { src: 'images/IMG_20250818_031846_(3).jpg', title: 'Redmond Outdoor Living', description: 'Cozy fire pit area with seating and lighting' },
     { src: 'images/IMG_20250818_031846_(4).jpg', title: 'Sammamish Privacy Fence', description: 'Cedar fence installation with clean lines' },
     { src: 'images/IMG_20250818_031847.jpg', title: 'Issaquah Garden & Hardscape', description: 'Polished garden and hardscape blend with lighting' },
+    { src: 'images/seattle-horizontal-wood-privacy-fence-1.jpg', title: 'Horizontal Wood Privacy Fence', description: 'Modern horizontal-slat cedar privacy fence by Westland Landscape' },
+    { src: 'images/seattle-horizontal-wood-privacy-fence-2.jpg', title: 'Modern Wood Fence', description: 'Clean lines and quality craftsmanship in the Greater Seattle Area' },
+    { src: 'images/seattle-horizontal-wood-privacy-fence-3.jpg', title: 'Backyard Privacy Fence', description: 'Custom horizontal-slat backyard fence construction' },
+    { src: 'images/seattle-horizontal-wood-privacy-fence-4.jpg', title: 'Cedar Fence Installation', description: 'Durable, weather-resistant cedar fence build' },
+    { src: 'images/seattle-horizontal-wood-privacy-fence-5.jpg', title: 'Finished Fence Project', description: 'Completed modern privacy fence boosting curb appeal' },
 ];
 
 function openLightbox(imgElement) {
